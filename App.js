@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -30,10 +29,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createNativeStackNavigator();
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
 // function Section({children, title}: SectionProps): React.JSX.Element {
 //   const isDarkMode = useColorScheme() === 'dark';
@@ -61,7 +56,7 @@ type SectionProps = PropsWithChildren<{
 //   );
 // }
 
-function App(): React.JSX.Element {
+function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -70,7 +65,7 @@ function App(): React.JSX.Element {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
       </Stack.Navigator>

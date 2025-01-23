@@ -18,6 +18,10 @@ export default function HomeScreen() {
   return (
     <View>
       <Text>Hello from Home Screen</Text>
+      <Button
+        title="Go to LoginScreen"
+        onPress={() => navigation.navigate('LoginScreen')} // Navigate to 'Details' screen
+      />
     </View>
   );
 }
