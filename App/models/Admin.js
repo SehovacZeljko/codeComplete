@@ -13,6 +13,17 @@ class Admin extends User {
   deleteUser(users, userId) {
     return users.filter(user => user.id !== userId);
   }
+  updateAdminLevel(newLevel) {
+    const validLevels = ['LevelOne', 'LevelTwo', 'LevelThree'];
+    if (validLevels.includes(newLevel)) {
+      this.adminLevel = newLevel;
+      console.log(`Admin level updated to ${this.adminLevel}`);
+    } else {
+      console.error(
+        'Invalid admin level. Please choose from "LevelOne", "LevelTwo", or "LevelThree".',
+      );
+    }
+  }
 }
 
 export default Admin;

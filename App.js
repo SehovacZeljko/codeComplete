@@ -33,10 +33,6 @@ const Stack = createNativeStackNavigator();
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeScreen">

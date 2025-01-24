@@ -21,9 +21,13 @@ export default function LoginScreen({navigation}) {
   const [currentAdmin, setCurrentAdmin] = useState(null);
   const [users, setUsers] = useState([]);
   const [adminLevel, setAdminLevel] = useState('LevelOne');
+  const [adminPromoteLevel, setAdminPromoteLevel] = useState('LevelOne');
 
   const handlePickerValueChange = itemValue => {
     setAdminLevel(itemValue);
+  };
+  const handlePickerUpdateValueChange = itemValue => {
+    setAdminPromoteLevel(itemValue);
   };
 
   const handleRegisterUser = () => {
@@ -49,6 +53,17 @@ export default function LoginScreen({navigation}) {
     navigation.navigate(screen, {admin: currentAdmin, users: userList});
   };
 
+  const handlePromoteUser = (adminUser, adminLvl) => {
+    const updatedAdminUser = new Admin(
+      adminUser.id,
+      adminUser.name,
+      adminUser.email,
+      adminUser.adminLevel,
+    );
+    updatedAdminUser.updateAdminLevel(adminLvl);
+    setCurrentAdmin(updatedAdminUser);
+  };
+
   useEffect(() => {
     console.log('User list', users);
   }, [users]);
@@ -56,15 +71,38 @@ export default function LoginScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={styles.userAdmin}>
-          <Text>
-            {`Current User: `}
-            {currentAdmin?.name}
-            {` (${currentAdmin?.email})`}
-          </Text>
-          <Text>{currentAdmin?.adminLevel}</Text>
-        </View>
-        <Text>Register User</Text>
+        {currentAdmin && (
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.userAdmin}>
+              <Text>
+                {`Current User: `}
+                {currentAdmin?.name}
+                {` (${currentAdmin?.email})`}
+              </Text>
+              <Text>{currentAdmin?.adminLevel}</Text>
+            </View>
+            <View style={styles.promoteContainer}>
+              <View style={styles.pickerContainer}>
+                <Picker
+                  selectedValue={adminPromoteLevel}
+                  onValueChange={handlePickerUpdateValueChange}
+                  style={styles.picker}
+                  itemStyle={styles.pickerItem}>
+                  <Picker.Item label="LevelOne" value="LevelOne" />
+                  <Picker.Item label="LevelTwo" value="LevelTwo" />
+                  <Picker.Item label="LevelThree" value="LevelThree" />
+                </Picker>
+              </View>
+              <Button
+                title="Change Admin lvl"
+                onPress={() => {
+                  handlePromoteUser(currentAdmin, adminPromoteLevel);
+                }}
+              />
+            </View>
+          </View>
+        )}
+        <Text style={{marginTop: 20}}>Register User</Text>
         <TextInput
           placeholder="ID"
           value={id}
@@ -142,8 +180,10 @@ const styles = StyleSheet.create({
   },
   navigateContainer: {flex: 1, justifyContent: 'center'},
   userAdmin: {
+    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
   },
+  promoteContainer: {flex: 1, justifyContent: 'center'},
 });
