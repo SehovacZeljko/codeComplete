@@ -6,16 +6,13 @@ class Admin extends User {
     this.adminLevel = adminLevel;
   }
 
-  createUser(users, user) {
-    users.push(user);
+  createUser(users, newUser) {
+    return [...users, newUser];
   }
 
   deleteUser(users, userId) {
-    const index = users.findIndex(user => user.id === userId);
-    if (index !== -1) {
-      users.splice(index, 1);
-    }
+    return users.filter(user => user.id !== userId);
   }
 }
 
-export {Admin};
+export default Admin;

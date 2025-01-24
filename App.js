@@ -17,9 +17,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import HomeScreen from './App/screens/HomeScreen/HomeScreen';
-import LoginScreen from './App/screens/LoginScreen/LoginScreen';
-
 import {
   Colors,
   DebugInstructions,
@@ -27,6 +24,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import HomeScreen from './App/screens/HomeScreen/HomeScreen';
+import LoginScreen from './App/screens/LoginScreen/LoginScreen';
+import UserListScreen from './App/screens/UserListScreen/UserListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +68,7 @@ function App() {
       <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="UserListScreen" component={UserListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     // <NavigationContainer>
