@@ -56,6 +56,14 @@ export default function LoginScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
+        <View style={styles.userAdmin}>
+          <Text>
+            {`Current User: `}
+            {currentAdmin?.name}
+            {` (${currentAdmin?.email})`}
+          </Text>
+          <Text>{currentAdmin?.adminLevel}</Text>
+        </View>
         <Text>Register User</Text>
         <TextInput
           placeholder="ID"
@@ -133,4 +141,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   navigateContainer: {flex: 1, justifyContent: 'center'},
+  userAdmin: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
 });
